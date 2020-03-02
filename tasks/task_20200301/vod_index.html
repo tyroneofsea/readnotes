@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="all" />
+<title>{maccms:name}</title>
+<meta name="keywords" content="{maccms:keywords}" />
+<meta name="description" content="{maccms:description}" />
+<link type="text/css" rel="stylesheet" href="{maccms:path_tpl}css/style.css" />
+</head>
+<body>
+{maccms:head}
+<div id="header_box"></div>
+<div id="top_box"></div>
+<div class="wrap mt10">
+	<div class="box movie_list">
+		<div class="title"><b class="sp_pri movie_ico"></b><h2>最新电影&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+ <font  size="3">{maccms:keywords}</font>
+
+
+
+<!-- 今日更新<strong>{maccms:count_vod_day}</strong>部
+{maccms:keywords}<br>
+<em>共有{maccms:count_vod_all}部影片</em>
+-->
+
+</div>
+		<ul>{maccms:vod num=12 order=desc}
+			<li><a href="[vod:link]" target="_blank"><img src="[vod:pic]" /><h3>[vod:name]</h3><span class="movie_date"><!--[if lt IE 9 ]><span class="bg_top"><![endif]-->[vod:time style=yyyy-mm-dd]<!--[if lt IE 9 ]></span><span class="bg_tail"></span><![endif]--></span></a></li>{/maccms:vod}
+		</ul>
+	</div>
+<div class="wrap mt10 clearfix">
+	<div class="box list box_left">
+		<div class="title"><b class="sp_pri pic_ico"></b><h2>免费在线av    99seku.com</h2></div>
+		<ul>{maccms:vod num=8 type=21 order=desc}
+			<li><a href="[vod:link]" target="_blank"><span>[vod:time style=mm-dd]</span>[vod:name]</a></li>{/maccms:vod}
+		</ul>
+	</div>
+	<div class="box list box_right">
+		<div class="title"><b class="sp_pri novel_ico"></b><h2>手机在线免费av    99seku.com</h2></div>
+		<ul>{maccms:vod num=8 type=22 order=desc}
+			<li><a href="[vod:link]" target="_blank"><span>[vod:time style=mm-dd]</span>[vod:name]</a></li>{/maccms:vod}
+		</ul>
+	</div>
+	</div>
+<!--
+<div class="wrap mt10 clearfix">
+	<div class="box movie_list">
+<div class="ylink clearfix">
+		<h3><i class="iconfont f-s-16 m-r-5">󰅋</i> 友情链接<span class="links-tz">【本站将不定期清理黑链、无效以及垃圾链接.恕不另行通知！】 </span></h3>
+
+    {maccms:link num=10}
+    <a href="[link:link]" target="_blank">[link:name]</a>
+	{/maccms:link}
+</div>
+-->
+	</section>
+</div>
+</div>
+</div>
+<div id="bottom_box"></div>
+<div id="footer_box"></div>
+{maccms:foot}
+<div style="display:none"></div>
+</body>
+</html>
