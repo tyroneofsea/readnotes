@@ -78,6 +78,6 @@ cd myDjangoProgram
 # 进入这个目录
 ls
 # 看一下这个目录
-dir
+tree
 # 看一下整个目录下的情况
 ```
