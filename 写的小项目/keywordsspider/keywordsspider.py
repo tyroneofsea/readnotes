@@ -3,6 +3,7 @@ import random
 import time
 from bs4 import BeautifulSoup
 import settings
+from mongomanager import KeywordsMongo
 '''
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Accept-Encoding: gzip, deflate, br
@@ -156,11 +157,12 @@ class KeywordsSpider(object):
 
     def get_urls_from_baidu(self):
         return_context = []
-        for i in range(0, 3):
+        for i in range(0, 60):
             url = self.baidu_url + self.keywords + '&pn=' + str(10*i)
             print(url)
-            headers = self.get_new_headers()
-            page = requests.get(url=url, headers=self.headers)
+            # headers = self.get_new_headers()
+            headers = self.headers
+            page = requests.get(url=url, headers=headers)
             time.sleep(random.uniform(1.1,5.4))
             # print(page.text)
             page.encoding = 'utf8'
@@ -168,6 +170,8 @@ class KeywordsSpider(object):
             print(page.status_code)
             soup = BeautifulSoup(page.text, "html5lib")
             tagh3 = soup.find_all('h3')
+            print(tagh3)
+            print(len(tagh3))
             for h3 in tagh3:
                 print("HI")
                 try:
@@ -183,6 +187,8 @@ class KeywordsSpider(object):
                 else:
                     print("result = ", result)
                     result["url"] = href
+                    keywordsmogodb = KeywordsMongo()
+                    keywordsmogodb.test_insert(self.keywords ,result)
                     return_context.append(result)
 
         return return_context

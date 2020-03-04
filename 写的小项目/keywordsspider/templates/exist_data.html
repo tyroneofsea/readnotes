@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Hello ErveryOne</title>
+    </head>
+    <body>
+            <h2>您要查询的数据已经存在于数据库，下面是为您显示的结果</h2><br>
+            <h2>如果您要再次查询并覆盖结果：</h2><br>
+            <h2>/q?name=你要查询的结果&c=1</h2><br>
+            <h2>因为会查询百度结果的前500个内容，耗时比较久。请耐心等待。。。</h2>
+        {% for con in context %}
+        <ul>
+            <li>标题（title）：{{ con.title }}</li>
+            <li>关键词：（keywords）{{ con.keywords }}</li>
+            <li>描述（description）：{{ con.description }}</li>
+            <!--
+                <div style="height:5px; width:100%; background-color: black; color:black"></div>
+            -->
+            <hr>
+        </ul
+
+
+        {% endfor %}
+    </body>
+</html>
