@@ -1,0 +1,18 @@
+.xuanfu{
+	left: 0;
+	position: fixed;
+	bottom: 0;//这里换成top:0;就悬浮在头部
+	width: 100%;
+	z-index: 100;
+}
+
+
+if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+    //alert(navigator.userAgent);
+    window.location.href ="iPhone.html";
+} else if (/(Android)/i.test(navigator.userAgent)) {
+    //alert(navigator.userAgent);
+    window.location.href ="Android.html";
+} else {
+    window.location.href ="pc.html";
+};

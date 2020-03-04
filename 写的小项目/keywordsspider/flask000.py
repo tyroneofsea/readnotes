@@ -22,19 +22,13 @@ def searche():
 
     km = KeywordsMongo()
     qname_list = km.get_collections_names()
-    if qname_list == None or certen_nub==1 :
+    if len(qname_list) == 0 or certen_nub==1 :
         kspider = keywordsspider.KeywordsSpider(keyname)
         return_context = kspider.get_urls_from_baidu()
         if len(return_context) == 0:
             return '<h2>baidu_url 读取错误, 可能该词被百度屏蔽，请再试一次！ </h2><br>'
         print("return_context=",return_context)
         print(type(return_context))
-        # context = {}
-        # for i in range(0, len(return_context)):
-        #     context.append(return_context[i])
-        # # return '<h2>' + request.args.get('name') + '</h2><br>'
-        # print(type(context))
-        # print(context)
         return render_template('alex.html', context=return_context)
 
     if (keyname in qname_list):
