@@ -11,9 +11,10 @@
             <h2>因为会查询百度结果的前500个内容，耗时比较久。请耐心等待。。。</h2>
         {% for con in context %}
         <ul>
-            <li>标题（title）：{{ con.title }}</li>
-            <li>关键词：（keywords）{{ con.keywords }}</li>
-            <li>描述（description）：{{ con.description }}</li>
+            <li>{{ con.title }}</li>
+            <li>{{ con.keywords }}</li>
+            <li>{{ con.description }}</li>
+            <li>{{ con.url }}</li>
             <!--
                 <div style="height:5px; width:100%; background-color: black; color:black"></div>
             -->

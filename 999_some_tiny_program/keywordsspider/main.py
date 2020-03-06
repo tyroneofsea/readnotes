@@ -11,12 +11,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<h2>欢迎来到Alex查询标题、关键词、描述</h2><br>'
+    return render_template('alex.html')
 
 @app.route('/q', methods=['GET','POST'])
 def searche():
     print(request.args.get('name'))
     keyname = request.args.get('name')
+    if keyname == '':
+        return '<h2>空值查询什么呢...</h2>'
 
     try:
         certen_nub = int(request.args.get('c'))
