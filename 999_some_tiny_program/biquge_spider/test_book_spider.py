@@ -1,3 +1,6 @@
+import requests
+
+
 USER_AGENTS = [
     'Mozilla/5.0 (Android; Mobile; rv:14.0) Gecko/14.0 Firefox/14.0',
     'Mozilla/5.0 (Android; Tablet; rv:14.0) Gecko/14.0 Firefox/14.0',
@@ -27,15 +30,12 @@ USER_HEADERS = {
     'Accept-Language': 'en-US,en;q=0.9',
     'Cache-Control': 'max-age=0',
     'Connection': 'keep-alive',
-    'Cookies': '',
     'Host': 'www.biquge.com.cn',
-    'Referer': '',
     'Sec-Fetch-Dest': 'document',
     'Sec-Fetch-Mode': 'navigate',
     'Sec-Fetch-Site': 'same-origin',
     'Sec-Fetch-User': '?1',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent':''
+    'Upgrade-Insecure-Requests': '1'
 }
 
 
@@ -50,3 +50,46 @@ MAIN_TAGET_URL = [
     'https://www.biquge.com.cn/qita/',
     'https://www.biquge.com.cn/quanben/'
 ]
+
+
+import urllib
+
+url = "https://www.biquge.com.cn/quanben/"
+
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"}
+
+request = urllib.request.urlopen(url=url)
+
+print(request.headers)
+
+print(request.read().decode('utf-8'))
+
+# def getCookie():
+#     url = "https://www.biquge.com.cn/quanben/"
+#     Hostreferer = {
+#         'Host':'www.biquge.com.cn',
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36'
+#     }
+#     #urllib或requests在打开https站点是会验证证书。 简单的处理办法是在get方法中加入verify参数，并设为False
+#     html = requests.get(url, headers=Hostreferer,verify=False)
+#     #获取cookie:DZSW_WSYYT_SESSIONID
+#     if html.status_code == 200:
+#         print(html.cookies)
+#         for cookie in html.cookies:
+#             print(cookie)
+#
+#
+# url1 = 'https://www.biquge.com.cn/'
+# url2 = 'https://www.biquge.com.cn/xuanhuan/'
+#
+# response = requests.Session().get(url='https://www.biquge.com.cn/quanben/')
+# print(response.headers)
+# print("get_new_cookies=",response.cookies)
+# #返回cookiejar对象
+# cookiejar = response.cookies
+# #转为字典
+# cookiedict = requests.utils.dict_from_cookiejar(cookiejar)
+# print(cookiedict)
+#
+#
+# getCookie()
