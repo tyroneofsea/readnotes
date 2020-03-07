@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+<h2>标题和内容修改页面，提交一次会把上一次的内容覆盖掉</h2>
+<form method="post">  <!-- 指定提交方法为 POST -->
+<label for="name">邮件标题</label>
+<input type="text" name="mail_title" style="width:600px" id="mail_title"><br><br>  <!-- 文本输入框 -->
+<label for="occupation">邮件内容</label>
+<!-- 文本输入框
+<input type="text" style="width:600px;height:380px" name="mail_content" id="mail_content"><br><br>
+-->
+<textarea  rows="10" style="width:600px;height:380px" name="mail_content" id="mail_content"></textarea>
+<input type="submit" name="submit" style="width:670px" value="提交">  <!-- 提交按钮 -->
+</form>
+    </body>
+</html>

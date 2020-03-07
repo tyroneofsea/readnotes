@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        {% if context %}
+            <h2 style="color:red">{{ context.res }}</h2>
+        {% endif %}
+        <h2>欢迎来到ALex群发邮件地址</h2>
+        <p style="color:red">
+            第一步：提交群发内容（如果发送内容不变，可以不用，程序会自动去找上次发送的内容去发）<br>
+            第二步：提交上传发件人（不用担心，发件人是否会被浪费，程序会自动去识别邮件是否发送成功，不成功的时候，会删除该发件人）<br>
+            第三步：提交收件人信息（程序会在这步之后，开始运行）<br>
+            <h2>程序运行结束，会自动给指定的邮箱发送内容，告诉你，本次发送的结果</h2>
+        </p>
+        <h2><a href="/titlecontext">修改邮件发送内容<----第一步点击这里</a></h2>
+        <h2><a href="/sender">上传发件人邮件地址<----第二步点击这里</a></h2>
+        <h2><a href="/rev">上传收件人邮件地址<----第三步点击这里</a></h2>
+
+    </body>
+</html>
