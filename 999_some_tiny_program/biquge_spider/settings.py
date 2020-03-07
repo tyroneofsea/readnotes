@@ -40,13 +40,13 @@ USER_HEADERS = {
 
 
 MAIN_TAGET_URL = [
-    'https://www.biquge.com.cn/xuanhuan/',
-    'https://www.biquge.com.cn/xiuzhen/',
-    'https://www.biquge.com.cn/dushi/',
-    'https://www.biquge.com.cn/lishi/',
-    'https://www.biquge.com.cn/wangyou/',
-    'https://www.biquge.com.cn/kehuan/',
-    'https://www.biquge.com.cn/yanqing/',
-    'https://www.biquge.com.cn/qita/',
-    'https://www.biquge.com.cn/quanben/'
+    '/xuanhuan/',
+    '/xiuzhen/',
+    '/dushi/',
+    '/lishi/',
+    '/wangyou/',
+    '/kehuan/',
+    '/yanqing/',
+    '/qita/',
+    '/quanben/'
 ]
