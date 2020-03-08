@@ -35,3 +35,7 @@ print(book_last_updata_url)
 
 next_url = soup.select('#wrapper .box_con #list dl dd a')[0].attrs['href']
 print(next_url)
+print("--------------------------------img_url-------------------------------------------------")
+img_url = soup.select('#wrapper .box_con #sidebar #fmimg img')[0].attrs['src']
+print(img_url)
+print("--------------------------------img_url-------------------------------------------------")

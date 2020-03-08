@@ -50,3 +50,37 @@ MAIN_TAGET_URL = [
     '/qita/',
     '/quanben/'
 ]
+MAIN_TAGET_TITLES = [
+    '玄幻小说',
+    '修真小说',
+    '都市小说',
+    '历史小说',
+    '网游小说',
+    '科幻小说',
+    '言情小说',
+    '其他小说',
+    '完结小说'
+]
+
+DATABASE_NAME = 'books' # 数据库名字
+
+BOOK_INFOS_COLLECTION = 'book_infos' # 存储书籍基本信息的表名（集合名）
+BOOK_ID = 'book_id'
+INFOS_CLASS = 'book_class'
+INFOS_NAME = 'book_name'
+INFOS_AUTHER = 'book_auther'
+INFOS_IMG_URL = 'book_img_url'
+INFOS_STATUS = 'book_status'
+INFOS_LAST_UPDATE_TIME = 'book_last_updata_time'
+INFOS_LAST_UPDATE_DESC = 'book_last_updata_desc'
+INFOS_LAST_UPDATE_URL = 'book_last_updata_url'
+INFOS_DECS = 'book_desc'
+
+BOOK_DETAILS_COLLECTION = 'book_details'  # 存储书籍每一章信息的表名（集合名）
+DETAILS_NEXT_URL = 'next_url'
+DETAILS_CAPTER_NUMB = 'book_capter_numb'
+DETAILS_CAPTER_NAME = 'book_capter_name'
+DETAILS_CONTENT = 'book_content'
+
+
+BOOK_IMG_DIR = './static/book_imgs' # 图片存放路径
