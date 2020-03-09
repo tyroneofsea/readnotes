@@ -1,5 +1,8 @@
 import urllib
 import requests
+from settings import *
+import random
+
 
 PROXY_POOL_URL = 'http://localhost:5555/random'
 
@@ -15,13 +18,14 @@ def get_proxy():
 
 def get_html(use_url):
     # use_url = self.url + url
-    print("spidering url =========>",  use_url)
-    req = urllib.request.urlopen(url=use_url)
-    try:
-        html = req.read().decode('utf-8')
-        print("获取到html")
-    except:
-        print("没有获取到html")
+    # print("spidering url =========>",  use_url)
+    # req = urllib.request.urlopen(url=use_url)
+    # try:
+    #     html = req.read().decode('utf-8')
+    #     print("获取到html")
+    #     return html
+    # except:
+    #     print("没有获取到html")
 
     proxy = get_proxy()
     proxies = {
@@ -32,10 +36,34 @@ def get_html(use_url):
     proxy_support = urllib.request.ProxyHandler(proxies)
     opener = urllib.request.build_opener(proxy_support)
     urllib.request.install_opener(opener)
+    # 代理设置完毕
+
+    headers = {
+        'User-Agent': USER_AGENTS[random.randint(0, 19)]
+    }
+    # headers获取完毕
+    print("headers = ", headers)
     try:
-        a = urllib.request.urlopen(use_url).read().decode("utf8")
+        req = urllib.request.Request(url=use_url, headers=headers)
+        print("req = ", req)
+        print("req.headers = ", req.headers)
+        response = urllib.request.urlopen(req)
+        print("response.headers = ", response.headers)
+        html = response.read().decode("utf8")
+        # print(html)
         print("获取到html")
+        return html
     except:
         print("没有获取到html")
+        return None
+
+    # try:
+    #     html = urllib.request.urlopen(use_url).read().decode("utf8")
+    #     # print(html)
+    #     print("获取到html")
+    #     return html
+    # except:
+    #     print("没有获取到html")
+    #     return None
 
 get_html('https://www.biquge.com.cn')

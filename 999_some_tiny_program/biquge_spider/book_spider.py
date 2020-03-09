@@ -35,13 +35,14 @@ class BookInitSpider(object):
         cookiejar.set_cookie(_cookies.create_cookie('cookie_name', cookie, **{'domain': '.example.com'}))
 
     def set_headers(self, url):
-        cookies = self.get_new_cookies(url)
-        if cookies == None:
-            return None
-        self.headers['Cookies'] = cookies
+        # cookies = self.get_new_cookies(url)
+        # if cookies == None:
+        #     return None
+        # self.headers['Cookies'] = cookies
         user_agent = USER_AGENTS[random.randint(0, 19)]
         self.headers['User-Agent'] = user_agent
-        self.headers['Referer'] = url
+        return self.headers
+        # self.headers['Referer'] = url
         # print("在重置之后的headers = ", self.headers)
 
     def get_proxy(self):
@@ -60,12 +61,13 @@ class BookInitSpider(object):
         try:
             request = urllib.request.urlopen(url=use_url)
             html = request.read().decode('utf-8')
+            print("无无无无无无无无无无无代理===========>", use_url)
             return html
         except:
-            print("不用代理抓取失败===========>", use_url)
-            return None
+            print("无无无无无无无无无无无代理代理抓取失败===========>", use_url)
 
-        proxy = get_proxy(PROXY_POOL_URL)
+        proxy = self.get_proxy()
+        print("代理>>>>>>>>>>>>>>>>>", proxy)
         proxies = {
             'socket':  proxy,
             'socket5': proxy
@@ -76,9 +78,10 @@ class BookInitSpider(object):
         urllib.request.install_opener(opener)
         try:
             html = urllib.request.urlopen(use_url).read().decode("utf8")
-            print("代理抓取成功===========>", use_url)
+            print("有有有有有有有有有有有有代理抓取成功===========>", use_url)
             return html
         except:
+            print("抓取彻底失败===========>", use_url)
             return None
         print("我最好不要出现，出现就是大问题===========>", use_url)
         return None
