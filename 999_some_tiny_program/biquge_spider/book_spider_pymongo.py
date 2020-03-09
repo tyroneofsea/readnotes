@@ -13,10 +13,10 @@ class SpiderMongo(object):
         self.db = self.client[DATABASE_NAME]
 
     def insert_data_dabases(self, collection, dict_list):
-        print("---------------------------insert_data_dabases------------------------------------")
-        print(collection)
-        print(dict_list)
-        print("---------------------------insert_data_dabases------------------------------------")
+        # print("---------------------------insert_data_dabases------------------------------------")
+        # print(collection)
+        # print(dict_list)
+        # print("---------------------------insert_data_dabases------------------------------------")
         collection_name = self.db[collection]
         try:
             res = collection_name.insert(dict_list)

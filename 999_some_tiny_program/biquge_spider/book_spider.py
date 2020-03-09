@@ -5,6 +5,7 @@ from settings import *
 import random
 import re
 from book_spider_pymongo import SpiderMongo
+import socket
 
 
 class BookInitSpider(object):
@@ -12,6 +13,7 @@ class BookInitSpider(object):
         self.url = 'https://www.biquge.com.cn'
         self.target_url = MAIN_TAGET_URL
         self.headers = USER_HEADERS
+        self.timeout = 2
         # print("在初始化的时候的headers = ", self.headers)
 
     def get_new_cookies(self, url):
@@ -42,12 +44,46 @@ class BookInitSpider(object):
         self.headers['Referer'] = url
         # print("在重置之后的headers = ", self.headers)
 
+    def get_proxy(self):
+        try:
+            res = requests.get(PROXY_POOL_URL)
+            if res.status_code == 200:
+                return res.text
+        except ConnectionError:
+            return None
+
     def get_html(self, url):
         use_url = self.url + url
         print("spidering url =========>",  use_url)
-        request = urllib.request.urlopen(url=use_url)
-        html = request.read().decode('utf-8')
-        return html
+        timeout = self.timeout
+        socket.setdefaulttimeout(timeout)
+        try:
+            request = urllib.request.urlopen(url=use_url)
+            html = request.read().decode('utf-8')
+            return html
+        except:
+            print("不用代理抓取失败===========>", use_url)
+            return None
+
+        proxy = get_proxy(PROXY_POOL_URL)
+        proxies = {
+            'socket':  proxy,
+            'socket5': proxy
+        }
+
+        proxy_support = urllib.request.ProxyHandler(proxies)
+        opener = urllib.request.build_opener(proxy_support)
+        urllib.request.install_opener(opener)
+        try:
+            html = urllib.request.urlopen(use_url).read().decode("utf8")
+            print("代理抓取成功===========>", use_url)
+            return html
+        except:
+            return None
+        print("我最好不要出现，出现就是大问题===========>", use_url)
+        return None
+
+
 
     def get_book_infos(self, url, book_class, book_id):
         html = self.get_html(url)
@@ -85,11 +121,11 @@ class BookInitSpider(object):
             INFOS_DECS: book_desc
 
         }
-        print("-----------------------------下载图片开始---------------------")
+        # print("-----------------------------下载图片开始---------------------")
         # todo 写入集合即表：book_infos中
         filepath = BOOK_IMG_DIR + '/' + data_for_book_infos[BOOK_ID] + '.jpg'
-        print(filepath)
-        print(data_for_book_infos[INFOS_IMG_URL])
+        # print(filepath)
+        # print(data_for_book_infos[INFOS_IMG_URL])
         try:
             urllib.request.urlretrieve(data_for_book_infos[INFOS_IMG_URL], filename=filepath)
             new_img_url = filepath
@@ -99,12 +135,12 @@ class BookInitSpider(object):
             new_img_url = None
         print(new_img_url)
         data_for_book_infos[INFOS_IMG_URL] = new_img_url
-        print('-------------------------------开始插入-----------------------------------')
+        # print('-------------------------------开始插入-----------------------------------')
         # print(BOOK_INFOS)
         # print(data_for_book_infos)
         spidermongo = SpiderMongo()
         spidermongo.insert_data_dabases(BOOK_INFOS_COLLECTION, data_for_book_infos)
-        print('--------------------------------结束插入----------------------------------')
+        # print('--------------------------------结束插入----------------------------------')
         # 返回第一页地址
         first_url = soup.select('#wrapper .box_con #list dl dd a')[0].attrs['href']
         return first_url
@@ -127,19 +163,19 @@ class BookInitSpider(object):
             DETAILS_CONTENT: book_content
         }
         #todo 将数据写入数据库
-        print('----------------------------开始插入book_details--------------------------------------')
+        # print('----------------------------开始插入book_details--------------------------------------')
         spidermongo = SpiderMongo()
         spidermongo.insert_data_dabases(BOOK_DETAILS_COLLECTION, data_for_book_details)
-        print('----------------------------结束插入book_details--------------------------------------')
+        # print('----------------------------结束插入book_details--------------------------------------')
         return next_url
 
     def start_get_info(self, url_str, book_class):
         try:
-            print(url_str)
+            # print(url_str)
             book_id = re.findall(r"\d+\.?\d*", url_str)[0]
             # 获得要去爬取的图书的ID
             first_url = self.get_book_infos(url=url_str, book_class=book_class, book_id=book_id)
-            print("I am OK2")
+            print("I am OK")
             # 查询并记录该小说的ID、书名、作者、状态、最后更新时间、最后一章URL、描述、分类
             # detail_url第一页的内容
             book_capter_numb = 0

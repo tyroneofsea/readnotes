@@ -84,3 +84,5 @@ DETAILS_CONTENT = 'book_content'
 
 
 BOOK_IMG_DIR = './static/book_imgs' # 图片存放路径
+
+PROXY_POOL_URL = 'http://localhost:5555/random'
