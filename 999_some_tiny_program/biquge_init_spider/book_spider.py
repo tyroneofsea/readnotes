@@ -53,19 +53,10 @@ class BookInitSpider(object):
         except ConnectionError:
             return None
 
-    def get_html(self, url):
+    def get_html_while(self, url):
         use_url = self.url + url
         print("spidering url =========>",  use_url)
-        timeout = self.timeout
-        socket.setdefaulttimeout(timeout)
-        # try:
-        #     request = urllib.request.urlopen(url=use_url)
-        #     html = request.read().decode('utf-8')
-        #     print("无无无无无无无无无无无代理===========>", use_url)
-        #     return html
-        # except:
-        #     print("无无无无无无无无无无无代理代理抓取失败===========>", use_url)
-
+        socket.setdefaulttimeout(self.timeout)
         proxy = self.get_proxy()
         proxies = {
             'socket':  proxy,
@@ -93,6 +84,12 @@ class BookInitSpider(object):
             print("没有获取到html")
             return None
 
+    def get_html(self, url):
+        html = self.get_html_while(url)
+        while html == None:
+            html = self.get_html_while(url)
+            time.sleep(1)
+        return html
 
 
     def get_book_infos(self, url, book_class, book_id):
