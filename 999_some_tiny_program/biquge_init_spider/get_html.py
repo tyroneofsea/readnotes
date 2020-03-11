@@ -4,7 +4,6 @@ from settings import *
 import random
 
 
-PROXY_POOL_URL = 'http://localhost:5555/random'
 
 def get_proxy():
     try:

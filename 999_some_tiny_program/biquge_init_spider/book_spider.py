@@ -34,7 +34,7 @@ class BookInitSpider(object):
         _cookies.remove_cookie_by_name(cookiejar, 'cookie_name')
         cookiejar.set_cookie(_cookies.create_cookie('cookie_name', cookie, **{'domain': '.example.com'}))
 
-    def set_headers(self, url):
+    def set_headers(self):
         # cookies = self.get_new_cookies(url)
         # if cookies == None:
         #     return None
@@ -58,16 +58,15 @@ class BookInitSpider(object):
         print("spidering url =========>",  use_url)
         timeout = self.timeout
         socket.setdefaulttimeout(timeout)
-        try:
-            request = urllib.request.urlopen(url=use_url)
-            html = request.read().decode('utf-8')
-            print("无无无无无无无无无无无代理===========>", use_url)
-            return html
-        except:
-            print("无无无无无无无无无无无代理代理抓取失败===========>", use_url)
+        # try:
+        #     request = urllib.request.urlopen(url=use_url)
+        #     html = request.read().decode('utf-8')
+        #     print("无无无无无无无无无无无代理===========>", use_url)
+        #     return html
+        # except:
+        #     print("无无无无无无无无无无无代理代理抓取失败===========>", use_url)
 
         proxy = self.get_proxy()
-        print("代理>>>>>>>>>>>>>>>>>", proxy)
         proxies = {
             'socket':  proxy,
             'socket5': proxy
@@ -76,15 +75,23 @@ class BookInitSpider(object):
         proxy_support = urllib.request.ProxyHandler(proxies)
         opener = urllib.request.build_opener(proxy_support)
         urllib.request.install_opener(opener)
+        # 代理设置完毕
+
+        headers = {
+            'User-Agent': USER_AGENTS[random.randint(0, 19)]
+        }
+        # headers获取完毕
+        print("headers = ", headers)
         try:
-            html = urllib.request.urlopen(use_url).read().decode("utf8")
-            print("有有有有有有有有有有有有代理抓取成功===========>", use_url)
+            req = urllib.request.Request(url=use_url, headers=headers)
+            response = urllib.request.urlopen(req)
+            html = response.read().decode("utf8")
+            # print(html)
+            print("获取到html")
             return html
         except:
-            print("抓取彻底失败===========>", use_url)
+            print("没有获取到html")
             return None
-        print("我最好不要出现，出现就是大问题===========>", use_url)
-        return None
 
 
 
