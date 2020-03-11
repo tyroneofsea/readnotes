@@ -59,15 +59,20 @@ class BookInitSpider(object):
         print("spidering url =========>",  use_url)
         socket.setdefaulttimeout(self.timeout)
         proxy = self.get_proxy()
-        print(proxy)
-        proxies = {
-            'socket':  proxy,
-            'socket5': proxy
-        }
+        if proxy == None:
+            print("代理无效，请速度检查代理池！")
+            print("代理无效，请速度检查代理池！")
+            pass
+        else:
+            print(proxy)
+            proxies = {
+                'socket':  proxy,
+                'socket5': proxy
+            }
 
-        proxy_support = urllib.request.ProxyHandler(proxies)
-        opener = urllib.request.build_opener(proxy_support)
-        urllib.request.install_opener(opener)
+            proxy_support = urllib.request.ProxyHandler(proxies)
+            opener = urllib.request.build_opener(proxy_support)
+            urllib.request.install_opener(opener)
         # 代理设置完毕
 
         headers = {
