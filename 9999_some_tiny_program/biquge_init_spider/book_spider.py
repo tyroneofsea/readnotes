@@ -229,11 +229,11 @@ class BookInitSpider(object):
         for book_info_url in list1:
             print(book_info_url["href"])
             self.start_get_info(book_info_url["href"], book_class)
-
-        list2 = soup.select('#main #newscontent .r ul li .s2 a')
-        for book_info_url in list1:
-            print(book_info_url["href"])
-            self.start_get_info(book_info_url["href"], book_class)
+        # 
+        # list2 = soup.select('#main #newscontent .r ul li .s2 a')
+        # for book_info_url in list2:
+        #     print(book_info_url["href"])
+        #     self.start_get_info(book_info_url["href"], book_class)
         return True
 
     def run(self):  # 实现主要逻辑
