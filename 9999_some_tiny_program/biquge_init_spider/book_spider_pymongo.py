@@ -20,10 +20,38 @@ class SpiderMongo(object):
         collection_name = self.db[collection]
         try:
             res = collection_name.insert(dict_list)
-
             return True
         except:
             return False
+
+    def is_book_id_in_mongodb(self, book_id):
+        collection_name = self.db['book_infos']
+        return collection_name.find_one({"book_id": book_id})
+
+
+    def get_newest_capter_numb_from_mongodb(self, book_id):
+        collection_name = self.db['book_details']
+        results =  collection_name.find({"book_id": book_id}).sort('_id', -1).limit(1)
+        return_list = []
+        for result in results:
+            return_list.append(result)
+        print(return_list)
+
+    def update_book_infos_by_book_id(self, book_id, data_list):
+        collection_name = self.db['book_infos']
+        condition = {'book_id': book_id}
+        book_infos = collection_name.find_one(condition)
+        book_infos[INFOS_STATUS] = data_list[INFOS_STATUS]
+        book_infos[INFOS_LAST_UPDATE_TIME] = data_list[INFOS_LAST_UPDATE_TIME]
+        book_infos[INFOS_LAST_UPDATE_DESC] = data_list[INFOS_LAST_UPDATE_DESC]
+        book_infos[INFOS_LAST_UPDATE_URL] = data_list[INFOS_LAST_UPDATE_URL]
+        result = collection_name.update_one(condition, {'$set': book_infos})
+        print(result)
+
+
+
+
+
 # 下面是测试的内容
 
 # def main():
