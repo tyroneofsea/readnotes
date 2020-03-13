@@ -184,36 +184,32 @@ class BookInitSpider(object):
         return next_url
 
     def start_get_info(self, url_str, book_class):
-        try:
-            # print(url_str)
-            book_id = re.findall(r"\d+\.?\d*", url_str)[0]
-            # 获得要去爬取的图书的ID
-            first_url = self.get_book_infos(url=url_str, book_class=book_class, book_id=book_id)
-            # 返回的是第一页地址
-            print("I am OK")
-            # 查询并记录该小说的ID、书名、作者、状态、最后更新时间、最后一章URL、描述、分类
-            # detail_url第一页的内容
-            book_capter_numb = 0
-            # 定义章节数
-            while True:
-                next_url = self.get_book_details(first_url, book_id, book_capter_numb)
-                book_capter_numb = book_capter_numb + 1
-                if url_str == next_url:
-                    print(url_str,'========================',next_url)
-                    print("因为最后的地址指向图书首页，所以这本数爬取完毕")
-                    print("因为最后的地址指向图书首页，所以这本数爬取完毕")
-                    print("因为最后的地址指向图书首页，所以这本数爬取完毕")
-                    print("因为最后的地址指向图书首页，所以这本数爬取完毕")
-                    return
-                else:
-                    print(first_url,'<<<<<<<<<<<<<<<<<<<<<<<<',next_url)
-                    first_url = next_url
+        # print(url_str)
+        book_id = re.findall(r"\d+\.?\d*", url_str)[0]
+        # 获得要去爬取的图书的ID
+        first_url = self.get_book_infos(url=url_str, book_class=book_class, book_id=book_id)
+        # 返回的是第一页地址
+        print("I am OK")
+        # 查询并记录该小说的ID、书名、作者、状态、最后更新时间、最后一章URL、描述、分类
+        # detail_url第一页的内容
+        book_capter_numb = 0
+        # 定义章节数
+        while True:
+            next_url = self.get_book_details(first_url, book_id, book_capter_numb)
+            book_capter_numb = book_capter_numb + 1
+            if url_str == next_url:
+                print(url_str,'========================',next_url)
+                print("因为最后的地址指向图书首页，所以这本数爬取完毕")
+                print("因为最后的地址指向图书首页，所以这本数爬取完毕")
+                print("因为最后的地址指向图书首页，所以这本数爬取完毕")
+                print("因为最后的地址指向图书首页，所以这本数爬取完毕")
+                return
+            else:
+                print(first_url,'<<<<<<<<<<<<<<<<<<<<<<<<',next_url)
+                first_url = next_url
             # 查询并记录该小说的ID、第几章、该章内容
-        except:
-            print("我出现意味着一部小说爬完了")
-            print("我出现意味着一部小说爬完了")
-            print("我出现意味着一部小说爬完了")
-            print("我出现意味着一部小说爬完了")
+        return True
+
 
     def get_spider_urls(self, url, book_class):
         html = self.get_html(url)
@@ -223,6 +219,7 @@ class BookInitSpider(object):
         for span in novelslist2:
             print(span.attrs['href'])
             self.start_get_info(span.attrs['href'], book_class)
+        return True
 
     def get_normal_urls(self, url, book_class):
         html = self.get_html(url)
@@ -237,13 +234,7 @@ class BookInitSpider(object):
         for book_info_url in list1:
             print(book_info_url["href"])
             self.start_get_info(book_info_url["href"], book_class)
-
-        # list2 = soup.select('#main .novelslist2 ul li .s2 a')
-
-
-
-
-
+        return True
 
     def run(self):  # 实现主要逻辑
         for i in range(0, len(self.target_url)):
