@@ -20,9 +20,10 @@ def post_get():
 @app.route("/hi1")
 @app.route("/hi2")
 def hi():
-    return 'hi page'
+    return 'hi page hi1, hi2'
 
 # 使用url_for的函数，通过视图函数的名字找到视图对应的url路径
+# 记得在上方导入from flask import redirect, url_for
 @app.route("/login")
 def login():
     url = url_for("index")
