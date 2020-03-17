@@ -306,11 +306,12 @@ class BookSpider(object):
                         print("该图书"+ book_id +"目前没有更新")
                     else:
                         print("该图书"+ book_id +"目前有有更新")
-                        book_capter_numb  = int(self.get_newest_capter_numb_from_mongodb(book_id))
+                        book_capter_numb  = int(self.get_newest_capter_numb_from_mongodb(book_id)) + 1
                         newest_url = self.update_book_infos_by_book_id(book_infos_index_url, book_class, book_id)
                         while True:
                             next_url = slef.get_book_details(mongodb_newest_url, book_id, book_capter_numb)
                             if newest_url == next_url:
+                                print("该图书"+ book_id +"更新完毕")
                                 break
                             else:
                                 book_capter_numb = book_capter_numb + 1
