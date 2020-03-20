@@ -38,8 +38,12 @@ def book_index(book_id):
 # 图书每一章接口
 @app.route("/book/<int:book_id>/<int:book_detail_id>")
 def book_detail(book_id, book_detail_id):
-    pass
-
+    if book_id and book_detail_id:
+        book_detail_infos = mongo.db.book_details.find({'book_id': book_id, 'book_detail_id': book_detail_id})
+        if book_detail_infos:
+            return jsonify(book_detail_infos)
+        else:
+            return 404
 
 
 
